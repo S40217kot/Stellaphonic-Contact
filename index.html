@@ -5,18 +5,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0b1020">
-  <meta name="description" content="Stellaphonicへのお問い合わせページです。ご質問、ご意見、不具合のご報告などを受け付けています。">
+
+  <meta
+    name="description"
+    content="Stellaphonicへのお問い合わせ。ご質問、ご意見、不具合のご報告などを受け付けています。"
+  >
+
   <title>お問い合わせ | Stellaphonic</title>
 
   <style>
     :root {
       color-scheme: dark;
       --bg: #0b1020;
-      --card: rgba(22, 31, 54, 0.82);
-      --line: rgba(174, 195, 255, 0.16);
-      --text: #f2f5ff;
-      --muted: #aab5d0;
-      --accent: #9cbcff;
+      --surface: #151e34;
+      --border: rgba(176, 198, 255, 0.17);
+      --text: #f5f7ff;
+      --muted: #aab6d0;
+      --accent: #a7c3ff;
     }
 
     * {
@@ -31,51 +36,58 @@
       margin: 0;
       min-height: 100vh;
       background:
-        radial-gradient(ellipse at 50% 0%,
-          #202f59 0%, transparent 55%),
-        var(--bg);
+        radial-gradient(
+          ellipse at top,
+          #23355f 0%,
+          #0b1020 60%
+        );
       color: var(--text);
       font-family:
-        -apple-system, BlinkMacSystemFont,
-        "Hiragino Kaku Gothic ProN",
-        "Hiragino Sans", "Yu Gothic",
-        Meiryo, sans-serif;
-      line-height: 1.8;
-      overflow-x: hidden;
+        -apple-system,
+        BlinkMacSystemFont,
+        "Hiragino Sans",
+        "Yu Gothic",
+        Meiryo,
+        sans-serif;
+      line-height: 1.75;
     }
 
     .stars {
       position: fixed;
       inset: 0;
+      z-index: 0;
       pointer-events: none;
       overflow: hidden;
-      z-index: 0;
     }
 
     .star {
       position: absolute;
       width: 2px;
       height: 2px;
-      background: #fff;
       border-radius: 50%;
-      opacity: 0.55;
-      animation: twinkle 5s ease-in-out infinite;
+      background: white;
+      animation: twinkle 5s infinite ease-in-out;
     }
 
     @keyframes twinkle {
-      0%, 100% { opacity: 0.15; }
-      50% { opacity: 0.85; }
+      0%, 100% {
+        opacity: 0.15;
+      }
+
+      50% {
+        opacity: 0.85;
+      }
     }
 
     .container {
       position: relative;
       z-index: 1;
-      width: min(100% - 36px, 820px);
+      width: min(100% - 32px, 820px);
       margin: 0 auto;
     }
 
     header {
-      padding: 34px 0 20px;
+      padding: 30px 0;
     }
 
     .brand {
@@ -83,123 +95,131 @@
       align-items: center;
       gap: 12px;
       color: var(--text);
-      text-decoration: none;
-      font-size: 21px;
+      font-size: 22px;
       font-weight: 700;
       letter-spacing: 0.04em;
+      text-decoration: none;
     }
 
-    .brand-symbol {
+    .brand-icon {
       display: grid;
       place-items: center;
-      width: 38px;
-      height: 38px;
-      border: 1px solid var(--line);
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--border);
       border-radius: 12px;
       color: var(--accent);
-      font-size: 24px;
+      font-size: 26px;
     }
 
     main {
-      padding: 45px 0 55px;
+      padding: 40px 0 65px;
     }
 
     .intro {
       text-align: center;
-      margin-bottom: 38px;
+      margin-bottom: 35px;
     }
 
     .eyebrow {
       color: var(--accent);
       font-size: 12px;
       font-weight: 700;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.22em;
     }
 
     h1 {
-      margin: 10px 0 16px;
-      font-size: clamp(29px, 5vw, 42px);
+      margin: 12px 0 16px;
+      font-size: clamp(30px, 5vw, 42px);
       letter-spacing: 0.04em;
-      line-height: 1.4;
     }
 
     .intro p {
+      margin: 0;
       color: var(--muted);
       font-size: 15px;
-      margin: 0;
     }
 
     .card {
-      padding: 30px;
-      border: 1px solid var(--line);
+      padding: 28px;
+      border: 1px solid var(--border);
       border-radius: 22px;
-      background: var(--card);
-      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.18);
-      backdrop-filter: blur(12px);
+      background: rgba(21, 30, 52, 0.9);
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.2);
     }
 
-    .section-title {
-      font-size: 20px;
+    h2 {
       margin: 0 0 8px;
+      font-size: 20px;
     }
 
-    .section-description {
+    .description {
+      margin: 0 0 24px;
       color: var(--muted);
       font-size: 14px;
-      margin: 0 0 22px;
     }
 
-    .form-frame {
-      display: block;
+    .form-container {
       width: 100%;
-      height: 850px;
-      border: 0;
+      overflow: hidden;
       border-radius: 12px;
       background: #fff;
     }
 
-    .form-fallback {
-      display: none;
-      padding: 38px 20px;
+    .form-container iframe {
+      display: block;
+      width: 100%;
+      height: 650px;
+      border: none;
+      background: #fff;
+    }
+
+    .form-help {
+      margin: 20px 0 0;
       text-align: center;
-      border: 1px dashed var(--line);
-      border-radius: 12px;
+    }
+
+    .form-help p {
+      margin: 0 0 12px;
       color: var(--muted);
+      font-size: 13px;
     }
 
-    .form-fallback h3 {
-      color: var(--text);
-      margin: 0 0 10px;
-    }
-
-    .form-fallback p {
-      margin: 0;
-    }
-
-    .form-link {
+    .button {
       display: inline-block;
-      margin-top: 16px;
+      padding: 12px 22px;
+      border: 1px solid rgba(167, 195, 255, 0.35);
+      border-radius: 11px;
+      background: rgba(167, 195, 255, 0.1);
       color: var(--accent);
-      text-decoration: underline;
-      text-underline-offset: 4px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    .button:hover {
+      background: rgba(167, 195, 255, 0.19);
+      border-color: var(--accent);
     }
 
     .mail-section {
-      margin-top: 24px;
+      margin-top: 32px;
       text-align: center;
     }
 
     .mail-section p {
+      margin: 0 0 10px;
       color: var(--muted);
       font-size: 14px;
-      margin-bottom: 10px;
     }
 
     .mail-link {
-      display: inline-block;
-      overflow-wrap: anywhere;
       color: var(--accent);
       font-weight: 600;
+      overflow-wrap: anywhere;
       text-underline-offset: 4px;
     }
 
@@ -207,7 +227,7 @@
       position: relative;
       z-index: 1;
       padding: 25px 0 35px;
-      border-top: 1px solid var(--line);
+      border-top: 1px solid var(--border);
       color: var(--muted);
       font-size: 12px;
       text-align: center;
@@ -215,26 +235,26 @@
 
     @media (max-width: 600px) {
       header {
-        padding-top: 22px;
+        padding: 22px 0;
       }
 
       main {
-        padding-top: 30px;
+        padding: 25px 0 50px;
       }
 
       .card {
-        padding: 16px 10px;
+        padding: 20px 12px;
         border-radius: 16px;
       }
 
-      .section-title,
-      .section-description {
-        margin-left: 8px;
-        margin-right: 8px;
+      h2,
+      .description {
+        margin-left: 6px;
+        margin-right: 6px;
       }
 
-      .form-frame {
-        height: 950px;
+      .form-container iframe {
+        height: 750px;
       }
     }
 
@@ -242,80 +262,97 @@
       .star {
         animation: none;
       }
-
-      html {
-        scroll-behavior: auto;
-      }
     }
   </style>
 </head>
 
 <body>
+
   <div class="stars" id="stars" aria-hidden="true"></div>
 
   <div class="container">
+
     <header>
-      <a class="brand" href="./" aria-label="Stellaphonic">
-        <span class="brand-symbol" aria-hidden="true">✦</span>
+      <a class="brand" href="./">
+        <span class="brand-icon" aria-hidden="true">✦</span>
         <span>Stellaphonic</span>
       </a>
     </header>
 
     <main>
+
       <section class="intro">
         <div class="eyebrow">CONTACT</div>
+
         <h1>お問い合わせ</h1>
+
         <p>
           Stellaphonicに関するご質問やご意見、<br>
           不具合のご報告などをお寄せください。
         </p>
       </section>
 
-      <section class="card" aria-labelledby="form-title">
-        <h2 class="section-title" id="form-title">
-          お問い合わせフォーム
-        </h2>
+      <section class="card">
 
-        <p class="section-description">
+        <h2>お問い合わせフォーム</h2>
+
+        <p class="description">
           以下のフォームからお問い合わせいただけます。
         </p>
 
-        <iframe
-          id="googleForm"
-          class="form-frame"
-          title="Stellaphonic お問い合わせフォーム"
-          loading="lazy"
-          referrerpolicy="strict-origin-when-cross-origin"
-        ></iframe>
+        <!-- Googleフォーム埋め込み -->
+        <div class="form-container">
 
-        <div class="form-fallback" id="formFallback">
-          <h3>お問い合わせフォーム</h3>
+          <iframe
+            title="Stellaphonic お問い合わせフォーム"
+            src="https://docs.google.com/forms/d/e/1FAIpQLSfeFCy4HIH8j2n1oY_CmeIjebS41Q2X7hcZwINOB5U0KwOaZA/viewform?embedded=true"
+            width="100%"
+            height="650"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0"
+          >
+            読み込んでいます…
+          </iframe>
+
+        </div>
+
+        <!-- 埋め込みが使えない環境向け -->
+        <div class="form-help">
+
           <p>
             フォームが表示されない場合は、<br>
-            下のリンクから直接開いてください。
+            以下のボタンから直接開いてください。
           </p>
+
           <a
-            id="formLink"
-            class="form-link"
-            href="#"
+            class="button"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSfeFCy4HIH8j2n1oY_CmeIjebS41Q2X7hcZwINOB5U0KwOaZA/viewform"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Googleフォームを開く
+            Googleフォームを直接開く ↗
           </a>
+
         </div>
+
       </section>
 
       <section class="mail-section">
+
         <p>メールでのお問い合わせはこちら</p>
+
         <a
           class="mail-link"
           href="mailto:sou.ok.0217@gmail.com"
         >
           sou.ok.0217@gmail.com
         </a>
+
       </section>
+
     </main>
+
   </div>
 
   <footer>
@@ -326,46 +363,30 @@
   </footer>
 
   <script>
-    const GOOGLE_FORM_URL = "const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfeFCy4HIH8j2n1oY_CmeIjebS41Q2X7hcZwINOB5U0KwOaZA/viewform?embedded=true";";
-
-    // Googleフォームを表示
-    const iframe = document.getElementById("googleForm");
-    const fallback = document.getElementById("formFallback");
-    const formLink = document.getElementById("formLink");
-
-    if (GOOGLE_FORM_URL.trim()) {
-      iframe.src = GOOGLE_FORM_URL;
-
-      formLink.href = GOOGLE_FORM_URL.replace(
-        /([?&])embedded=true(&?)/,
-        (match, start, end) => {
-          return end ? start : "";
-        }
-      );
-    } else {
-      iframe.style.display = "none";
-      fallback.style.display = "block";
-      formLink.style.display = "none";
-      fallback.querySelector("p").textContent =
-        "現在、お問い合わせフォームを準備しています。メールからお問い合わせください。";
-    }
-
     // フッターの年を自動更新
     document.getElementById("year").textContent =
       new Date().getFullYear();
 
-    // 星空の装飾を生成
-    const starsContainer = document.getElementById("stars");
-    const fragment = document.createDocumentFragment();
+    // 背景の星を生成
+    const starsContainer =
+      document.getElementById("stars");
+
+    const fragment =
+      document.createDocumentFragment();
 
     for (let i = 0; i < 75; i++) {
       const star = document.createElement("span");
+
       star.className = "star";
 
-      star.style.left = Math.random() * 100 + "%";
-      star.style.top = Math.random() * 100 + "%";
+      star.style.left =
+        Math.random() * 100 + "%";
+
+      star.style.top =
+        Math.random() * 100 + "%";
 
       const size = 1 + Math.random() * 2;
+
       star.style.width = size + "px";
       star.style.height = size + "px";
 
@@ -377,5 +398,6 @@
 
     starsContainer.appendChild(fragment);
   </script>
+
 </body>
 </html>
